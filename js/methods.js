@@ -152,7 +152,7 @@ function CreateAsync() {
       alert("Ocorreu um erro ao cadastrar: " + result.filmTitulo, error);
     });
 
-  // A função continua a execução normalmente aqui, sem retornar nada
+  return false;
 }
 
 function hideShowForm() {
