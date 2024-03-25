@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#button-cadastrar {
+  margin-top: 5px;
+}
+
+#button-atualizar {
+  margin-top: 5px;
+}
