@@ -121,21 +121,7 @@ function UpdateAsync() {
   return false;
 }
 
-function CreateAsync() {
-  let Titulo = document.getElementById("titulo").value;
-  let Diretor = document.getElementById("diretor").value;
-  let Elenco = document.getElementById("elenco").value;
-  let Pais = document.getElementById("pais").value;
-  let Ano = document.getElementById("ano").value;
-
-  const data = {
-    titulo: Titulo,
-    diretor: Diretor,
-    elenco: Elenco,
-    pais: Pais,
-    ano: Ano,
-  };
-
+function CreateAsync(data) {
   fetch("https://localhost:7256/Film", {
     method: "POST",
     headers: {
@@ -149,10 +135,62 @@ function CreateAsync() {
       location.reload();
     })
     .catch((error) => {
-      alert("Ocorreu um erro ao cadastrar: " + result.filmTitulo, error);
+      Swal.fire({
+        title: "Erro",
+        text: "Houver um erro ao salvar os dados" + error,
+        icon: "error",
+      });
     });
+}
+
+function salvar() {
+  let Titulo = document.getElementById("titulo").value;
+  let Diretor = document.getElementById("diretor").value;
+  let Elenco = document.getElementById("elenco").value;
+  let Pais = document.getElementById("pais").value;
+  let Ano = document.getElementById("ano").value;
+
+  let erros = [];
+
+  const data = {
+    titulo: Titulo,
+    diretor: Diretor,
+    elenco: Elenco,
+    pais: Pais,
+    ano: Ano,
+  };
+  if (Titulo == "" || temNumeroNoMeio(Titulo)) {
+    erros.push("O Titulo não pode ser vazio ou conter numeros!\n");
+  }
+  if (Diretor == "" || temNumeroNoMeio(Diretor)) {
+    erros.push("O Diretor não pode ser vazio ou conter numeros!\n");
+  }
+  if (Elenco == "" || temNumeroNoMeio(Elenco)) {
+    erros.push("O Elenco não pode ser vazio ou conter numeros!\n");
+  }
+  if (Pais == "" || temNumeroNoMeio(Pais)) {
+    erros.push("O Pais não pode ser vazio ou conter numeros!\n");
+  }
+  if (Ano == "") {
+    erros.push("O Ano não pode ser vazio ou conter letras!\n");
+  }
+
+  if (erros.length == 0) {
+    CreateAsync(data);
+  } else {
+    Swal.fire({
+      title: "Preencha os campos corretamente",
+      text: erros.join(),
+      icon: "error",
+    });
+  }
 
   return false;
+}
+
+function temNumeroNoMeio(string) {
+  var regex = /.*\d+.*$/;
+  return regex.test(string);
 }
 
 function hideShowForm() {
@@ -167,6 +205,7 @@ function hideShowForm() {
 }
 
 function hideShowTable() {
+  listar();
   if (condition == false) {
     document.getElementById("tabela").style.display = "block";
     condition = true;
