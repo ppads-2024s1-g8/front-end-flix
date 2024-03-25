@@ -67,6 +67,7 @@ function excluir(id) {
 function atualizar(id) {
   document.getElementById("form").style.display = "block";
   document.getElementById("button-atualizar").style.display = "block";
+  document.getElementById("button-cadastrar").style.display = "none";
 
   filmeEmEdicao = id;
   fetch("https://localhost:7256/Film/" + id, {
