@@ -4,7 +4,7 @@ var filmeEmEdicao;
 function listar() {
   document.getElementById("form").style.display = "none";
 
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/", {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -123,7 +123,7 @@ function UpdateAsync() {
 }
 
 function CreateAsync(data) {
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/", {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
