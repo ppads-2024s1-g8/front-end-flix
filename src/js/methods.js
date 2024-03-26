@@ -2,7 +2,7 @@ var condition = false;
 var filmeEmEdicao;
 
 function listar() {
-  
+  document.getElementById("button-atualizar").style.display = "none";
   fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
     method: "GET",
     headers: {
@@ -191,24 +191,4 @@ function salvar() {
 function temNumeroNoMeio(string) {
   var regex = /.*\d+.*$/;
   return regex.test(string);
-}
-
-function hideShowForm() {
-  if (condition == false) {
-    document.getElementById("form").style.display = "block";
-    condition = true;
-  } else {
-    document.getElementById("form").style.display = "none";
-    condition = false;
-  }
-}
-
-function hideShowTable() {
-  if (condition == false) {
-    document.getElementById("tabela").style.display = "block";
-    condition = true;
-  } else {
-    document.getElementById("tabela").style.display = "none";
-    condition = false;
-  }
 }
