@@ -4,7 +4,7 @@ var filmeEmEdicao;
 function listar() {
   document.getElementById("form").style.display = "none";
 
-  fetch("https://localhost:7256/Film", {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/", {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -48,7 +48,7 @@ function renderizar(Filmes) {
 }
 
 function excluir(id) {
-  fetch("https://localhost:7256/Film/" + id, {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -70,7 +70,7 @@ function atualizar(id) {
   document.getElementById("button-cadastrar").style.display = "none";
 
   filmeEmEdicao = id;
-  fetch("https://localhost:7256/Film/" + id, {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -104,7 +104,7 @@ function UpdateAsync() {
     ano: Ano,
   };
 
-  fetch("https://localhost:7256/Film/" + id, {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",
@@ -123,7 +123,7 @@ function UpdateAsync() {
 }
 
 function CreateAsync(data) {
-  fetch("https://localhost:7256/Film", {
+  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
