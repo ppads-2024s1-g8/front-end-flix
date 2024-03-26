@@ -1,4 +1,4 @@
-var condition = false;
+
 var filmeEmEdicao;
 
 function listar() {
