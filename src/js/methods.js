@@ -2,8 +2,7 @@ var condition = false;
 var filmeEmEdicao;
 
 function listar() {
-  document.getElementById("form").style.display = "none";
-
+  
   fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
     method: "GET",
     headers: {
@@ -195,7 +194,6 @@ function temNumeroNoMeio(string) {
 }
 
 function hideShowForm() {
-  document.getElementById("button-atualizar").style.display = "none";
   if (condition == false) {
     document.getElementById("form").style.display = "block";
     condition = true;
@@ -206,7 +204,6 @@ function hideShowForm() {
 }
 
 function hideShowTable() {
-  listar();
   if (condition == false) {
     document.getElementById("tabela").style.display = "block";
     condition = true;
