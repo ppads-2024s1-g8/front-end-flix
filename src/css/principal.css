@@ -17,10 +17,10 @@ header nav {
 
 .buttons-create {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.container {
+main {
   display: flex;
   flex-direction: column;
   align-content: space-around;
