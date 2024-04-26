@@ -1,9 +1,11 @@
-
+var condition = false;
 var filmeEmEdicao;
+var url = "https://localhost:7256/";
 
 function listar() {
-  document.getElementById("button-atualizar").style.display = "none";
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
+  document.getElementById("form").style.display = "none";
+
+  fetch(url + "Film", {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -46,48 +48,6 @@ function renderizar(Filmes) {
   }
 }
 
-function excluir(id) {
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("O filme " + data.titulo + " foi apagado com sucesso !");
-      listar();
-    })
-    .catch((error) => {
-      alert("Ocorreu um erro ao deletar o filme! ", error);
-    });
-}
-
-function atualizar(id) {
-  document.getElementById("form").style.display = "block";
-  document.getElementById("button-atualizar").style.display = "block";
-  document.getElementById("button-cadastrar").style.display = "none";
-
-  filmeEmEdicao = id;
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById("titulo").value = data.titulo;
-      document.getElementById("diretor").value = data.diretor;
-      document.getElementById("elenco").value = data.elenco;
-      document.getElementById("pais").value = data.pais;
-      document.getElementById("ano").value = data.ano;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function UpdateAsync() {
   let id = filmeEmEdicao;
   let Titulo = document.getElementById("titulo").value;
@@ -103,7 +63,7 @@ function UpdateAsync() {
     ano: Ano,
   };
 
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film/" + id, {
+  fetch(url + id, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",
@@ -122,7 +82,7 @@ function UpdateAsync() {
 }
 
 function CreateAsync(data) {
-  fetch("https://webapp-c65ipixzdnqpa.azurewebsites.net/Film", {
+  fetch(url, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -140,6 +100,43 @@ function CreateAsync(data) {
         text: "Houver um erro ao salvar os dados" + error,
         icon: "error",
       });
+    });
+}
+
+function excluir(id) {
+  fetch(url + id, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert("O filme " + data.titulo + " foi apagado com sucesso !");
+      listar();
+    })
+    .catch((error) => {
+      alert("Ocorreu um erro ao deletar o filme! ", error);
+    });
+}
+
+function atualizar(id) {
+  fetch(url + id, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("titulo").value = data.titulo;
+      document.getElementById("diretor").value = data.diretor;
+      document.getElementById("elenco").value = data.elenco;
+      document.getElementById("pais").value = data.pais;
+      document.getElementById("ano").value = data.ano;
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
@@ -192,3 +189,8 @@ function temNumeroNoMeio(string) {
   var regex = /.*\d+.*$/;
   return regex.test(string);
 }
+
+document.getElementById("criar-filme").addEventListener("click", function () {
+  var modal = new bootstrap.Modal(document.getElementById("modalCriarFilme"));
+  modal.show();
+});
