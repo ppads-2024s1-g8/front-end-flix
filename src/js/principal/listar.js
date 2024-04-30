@@ -31,7 +31,7 @@ async function listarFilmes() {
               <p class="card-text">Ano: ${filme.ano}</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Avaliações: lorem </small>
+              <button class="btn btn-primary avaliar-btn">Avaliações: <span class="avaliacoes">0</span></button>
             </div>
           </div>
         </div>
