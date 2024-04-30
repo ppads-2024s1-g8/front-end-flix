@@ -1,4 +1,4 @@
-var url_api_back = "https://localhost:7256/";
+var url_api_back = "flix.azurewebsites.net/";
 
 document
   .getElementById("form-login")
