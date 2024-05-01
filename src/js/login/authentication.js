@@ -1,4 +1,4 @@
-var url_api_back = "flix.azurewebsites.net/";
+var url_api_back = "https://backend-flix.azurewebsites.net/";
 
 document
   .getElementById("form-login")
