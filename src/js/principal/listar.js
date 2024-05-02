@@ -16,7 +16,6 @@ async function listarFilmes() {
     for (const filme of data) {
       const card = document.createElement("div");
       card.classList.add("col-lg-4");
-
       const imageSrc = await imagesFilmesSeries(filme.titulo);
 
       card.innerHTML = `
@@ -31,13 +30,22 @@ async function listarFilmes() {
               <p class="card-text">Ano: ${filme.ano}</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary avaliar-btn">Avaliações: <span class="avaliacoes">0</span></button>
+              <button class="btn btn-primary avaliar-btn" data-id="${filme.id}" data-tipo="Filme">Avaliações: ${filme.avaliacao}</span></button>
             </div>
           </div>
         </div>
       `;
       filmesContainer.appendChild(card);
     }
+
+    const botoesAvaliacao = document.querySelectorAll(".avaliar-btn");
+    botoesAvaliacao.forEach((botao) => {
+      botao.addEventListener("click", function () {
+        const Id = this.getAttribute("data-id");
+        const tipoMidia = this.getAttribute("data-tipo");
+        adicionarAvaliacao(Id, tipoMidia);
+      });
+    });
   } catch (error) {
     console.error(error);
   }
@@ -70,13 +78,21 @@ async function listarSeries() {
               <p class="card-text">Temporadas: ${serie.numeroTemporadas}</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Avaliações: lorem </small>
+              <button class="btn btn-primary avaliar-btn" data-id="${serie.id}" data-tipo="Serie">Avaliações: ${serie.avaliacao}</span></button>
             </div>
           </div>
         </div>
       `;
       seriesContainer.appendChild(card);
     }
+    const botoesAvaliacao = document.querySelectorAll(".avaliar-btn");
+    botoesAvaliacao.forEach((botao) => {
+      botao.addEventListener("click", function () {
+        const Id = this.getAttribute("data-id");
+        const tipoMidia = this.getAttribute("data-tipo");
+        adicionarAvaliacao(Id, tipoMidia);
+      });
+    });
   } catch (error) {
     console.error(error);
   }
@@ -106,13 +122,41 @@ async function listarLivros() {
               <p class="card-text">Ano: ${livro.ano}</p>
             </div>
             <div class="card-footer">
-              <small class="text-muted">Avaliações: lorem </small>
+              <button class="btn btn-primary avaliar-btn" data-id="${livro.id}" data-tipo="Livro">Avaliações: ${livro.avaliacao}</span></button>
             </div>
           </div>
         </div>
       `;
       livrosContainer.appendChild(card);
     }
+    const botoesAvaliacao = document.querySelectorAll(".avaliar-btn");
+    botoesAvaliacao.forEach((botao) => {
+      botao.addEventListener("click", function () {
+        const Id = this.getAttribute("data-id");
+        const tipoMidia = this.getAttribute("data-tipo");
+        adicionarAvaliacao(Id, tipoMidia);
+      });
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function adicionarAvaliacao(Id, tipoMidia) {
+  try {
+    // Envie o ID do filme e o tipo de mídia para o backend
+    const response = await fetch(url_api_back + "User/avaliacoes", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        tipo: tipoMidia,
+        id: Id,
+      }),
+    });
+    const result = await response.json();
+    console.log(result); // Faça o que for necessário com a resposta do backend
   } catch (error) {
     console.error(error);
   }

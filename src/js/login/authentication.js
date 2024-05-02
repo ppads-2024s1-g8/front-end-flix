@@ -16,7 +16,7 @@ async function autenticarUsuario() {
     Password: Senha,
   };
 
-  fetch(url_api_back + "User/login", {
+  fetch(url_api_back + "User/Login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
