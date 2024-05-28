@@ -5,6 +5,11 @@ async function imagesFilmesSeries(titulo) {
   return image.Poster;
 }
 
+document.getElementById("comentario").addEventListener("click", function () {
+  var modal = new bootstrap.Modal(document.getElementById("comentariosModal"));
+  modal.show();
+});
+
 async function listarFilmes() {
   try {
     const response = await fetch(url_api_back + "Film");
@@ -32,6 +37,9 @@ async function listarFilmes() {
             <div class="card-footer">
               <button class="btn btn-primary avaliar-btn" data-id="${filme.id}" data-tipo="Filme">Avaliações: ${filme.avaliacao}</span></button>
             </div>
+            <button type="button" class="btn btn-primary" id="comentario">
+              Comentarios
+            </button>
           </div>
         </div>
       `;
@@ -123,6 +131,7 @@ async function listarLivros() {
             </div>
             <div class="card-footer">
               <button class="btn btn-primary avaliar-btn" data-id="${livro.id}" data-tipo="Livro">Avaliações: ${livro.avaliacao}</span></button>
+              <button class="btn btn-primary comentarios-btn" data-id="${livro.id}" data-tipo="Livro">Comentários</button>
             </div>
           </div>
         </div>
