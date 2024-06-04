@@ -5,11 +5,6 @@ async function imagesFilmesSeries(titulo) {
   return image.Poster;
 }
 
-document.getElementById("comentario").addEventListener("click", function () {
-  var modal = new bootstrap.Modal(document.getElementById("comentariosModal"));
-  modal.show();
-});
-
 async function listarFilmes() {
   try {
     const response = await fetch(url_api_back + "Film");
@@ -42,6 +37,14 @@ async function listarFilmes() {
             </button>
           </div>
         </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("comentario").addEventListener("click", function () {
+              var modal = new bootstrap.Modal(document.getElementById("comentariosModal"));
+              modal.show();
+            });
+          });
+        </script>
       `;
       filmesContainer.appendChild(card);
     }
